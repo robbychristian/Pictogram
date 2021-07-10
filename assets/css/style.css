@@ -1,0 +1,51 @@
+body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.navbtn {
+    border-radius: 5rem;
+    margin: 0 2rem 0 0 ;
+    background: #F1FAEE;
+    color: #457B9D;
+    text-align: center;
+    width: 6rem;
+    transition: 0.7s;
+}
+
+.navbtn:hover {
+    background-color: #457B9D;
+    color: #F1FAEE;
+    transition: 0.7s;
+}
+
+.register-bg {
+    background: #F1FAEE;
+    color: #457B9D;
+}
+
+.reg-btn {
+    padding: 0.5rem 2rem;
+    font-weight: 500;
+    background: white;
+    color: #457B9D;
+    border-radius: 5rem;
+    border: 1px white solid;
+}
+
+.submit-btn-container {
+    margin: 0 auto;
+    width: 1rem;
+}
+
+@media only screen and (max-width: 576px) {
+    .navbtn {
+        border-radius: 0rem;
+        width: 100%;
+        margin-left: -0.7rem;
+    }
+
+    .submit-btn-container {
+        width: 7rem;
+    }
+}
