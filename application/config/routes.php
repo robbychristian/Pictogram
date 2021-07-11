@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['home'] = "PagesController/home";
 $route['register'] = "PagesController/register";
 $route['login'] = "PagesController/login";
+$route['create'] = "UserController/create";

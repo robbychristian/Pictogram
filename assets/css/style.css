@@ -38,6 +38,29 @@ body {
     width: 1rem;
 }
 
+.form-error {
+    border-color: red;
+}
+
+.verify-button {
+    font-size: 1.5rem;
+    border: 0px;
+    border-radius: 5rem;
+    margin: 0 2rem 0 0 ;
+    background: #F1FAEE;
+    color: #457B9D;
+    text-align: center;
+    transition: 0.7s;
+    padding: 1rem 3rem;
+}
+
+.verify-button:hover {
+    background-color: #457B9D;
+    color: #F1FAEE;
+    transition: 0.7s;
+}
+
+
 @media only screen and (max-width: 576px) {
     .navbtn {
         border-radius: 0rem;
