@@ -33,4 +33,16 @@ class UserModel extends CI_Model
         $this->db->update('user_accounts', $data);
     }
 
+    public function getUser($uname, $pass)
+    {
+        $this->db->where('user_name', $uname);
+        $this->db->where('user_pass', $pass);
+        $query = $this->db->get('user_accounts');
+        if ($query->num_rows() > 0) {
+            $data = $query->result_array();
+            return $data;
+        } else {
+            return false;
+        }
+    }
 }

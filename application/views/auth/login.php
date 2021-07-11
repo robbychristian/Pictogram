@@ -10,17 +10,17 @@
         </div>
         <div class="row justify-content-center mt-5">
             <div class="col mt-5">
-                <?php echo form_open() ?>
+                <?php echo form_open('UserController/login') ?>
                     <div class="form-group row mt-5 ml-5 mr-5 mb-5">
                         <label for="inputPassword" class="col-lg-3 col-form-label col-form-label-lg mt-5">Username</label>
                         <div class="col-xl-9">
-                            <input type="text" class="form-control form-control-lg mt-5" id="inputPassword">
+                            <input type="text" class="form-control form-control-lg mt-5" name="uname">
                         </div>
                     </div>
                     <div class="form-group row ml-5 mr-5 mb-5">
                         <label for="inputPassword" class="col-lg-3 col-form-label col-form-label-lg">Password</label>
                         <div class="col-xl-9">
-                            <input type="password" class="form-control form-control-lg" id="inputPassword">
+                            <input type="password" class="form-control form-control-lg" name="pass">
                         </div>
                     </div>
                     <div class="mx-auto submit-btn-container">

@@ -25,6 +25,7 @@
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0" style="width: 28rem">
+            <?php if (!$this->session->has_userdata('logged_in')): ?>
                 <li class="nav-item active">
                     <a class="nav-link navbtn" href="http://localhost/pictogram/index.php/home">Home</a>
                 </li>
@@ -34,6 +35,17 @@
                 <li class="nav-item active">
                     <a class="nav-link navbtn" href="http://localhost/pictogram/index.php/login">Login</a>
                 </li>
+            <?php elseif ($this->session->has_userdata('logged_in')): ?>
+                <li class="nav-item active">
+                    <a class="nav-link navbtn" href="#">Timeline</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link navbtn" href="#">Profile</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link navbtn" href="<?php echo base_url(); ?>index.php/UserController/logout">Logout</a>
+                </li>
+            <?php endif; ?>
             </ul>
         </div>
     </nav>
