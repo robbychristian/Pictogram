@@ -24,8 +24,8 @@ class UserController extends CI_Controller
             $config['smtp_pass']    = 'slark022';
             $config['charset']    = 'utf-8';
             $config['newline']    = "\r\n";
-            $config['mailtype'] = 'html'; // or html
-            $config['validation'] = TRUE; // bool whether to validate email or not      
+            $config['mailtype'] = 'html';
+            $config['validation'] = TRUE;
             $this->email->initialize($config);
             $this->email->from('accounydummy001@gmail.com', 'Pixel Team');
             $this->email->to($newUser['user_email']);
@@ -48,29 +48,37 @@ class UserController extends CI_Controller
     public function login()
     {
         $this->load->model('UserModel');
-        $uname = $this->input->post('uname');
-        $pass = $this->input->post('pass');
-        $user = $this->UserModel->getUser($uname, $pass);
-        if ($user == false) {
-            echo "No user";
+        $this->form_validation->set_rules('uname', 'Username', 'required');
+        $this->form_validation->set_rules('pass', 'Password', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('layouts/header');
+            $this->load->view('auth/login');
+            $this->load->view('layouts/footer');
         } else {
-            $result = $user[0];
-            if ($result['user_status'] != '1') {
-                $this->load->view('layouts/header');
-                $this->load->view('auth/unverified');
-                $this->load->view('layouts/footer');
+            $uname = $this->input->post('uname');
+            $pass = $this->input->post('pass');
+            $user = $this->UserModel->getUser($uname, $pass);
+            if ($user == false) {
+                echo "No user";
             } else {
-                $userdata = array(
-                    'fname' => $result['first_name'],
-                    'lname' => $result['last_name'],
-                    'email' => $result['user_email'],
-                    'uname' => $result['user_name'],
-                    'pass' => $result['user_pass'],
-                    'avatar' => $result['user_avatar'],
-                    'logged_in' => true
-                );
-                $this->session->set_userdata($userdata);
-                echo $_SESSION['fname'];
+                $result = $user[0];
+                if ($result['user_status'] != '1') {
+                    $this->load->view('layouts/header');
+                    $this->load->view('auth/unverified');
+                    $this->load->view('layouts/footer');
+                } else {
+                    $userdata = array(
+                        'fname' => $result['first_name'],
+                        'lname' => $result['last_name'],
+                        'email' => $result['user_email'],
+                        'uname' => $result['user_name'],
+                        'pass' => $result['user_pass'],
+                        'avatar' => $result['user_avatar'],
+                        'logged_in' => true
+                    );
+                    $this->session->set_userdata($userdata);
+                    echo $_SESSION['fname'];
+                }
             }
         }
     }

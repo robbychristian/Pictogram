@@ -60,6 +60,50 @@ body {
     transition: 0.7s;
 }
 
+.post-caption {
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.7);
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+}
+
+.timeline-body {
+    background-color: #457B9D;
+    overflow-y: auto;
+}
+
+.post-icon-bg {
+    position: fixed;
+    background: #a8dadc;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    right: 6rem; 
+    bottom: 3rem;
+}
+
+.post-icon-bg:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.post-image-container {
+    margin: 0 auto;
+    width: 55rem; 
+    height: 100%; 
+    min-width: 50rem; 
+    min-height: 50rem;
+}
+
+.post-error {
+    display: none;
+}
+.custom-file-upload:hover {
+    display: inline-block;
+    opacity: 0.6;
+}
+
 
 @media only screen and (max-width: 576px) {
     .navbtn {

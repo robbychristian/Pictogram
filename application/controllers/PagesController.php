@@ -34,4 +34,28 @@ class PagesController extends CI_Controller
         }
         $this->load->view('layouts/footer');
     }
+
+    public function timeline()
+    {
+        $this->load->model('PostModel');
+        $data['posts'] = $this->PostModel->getPost();
+        $this->load->view('layouts/header');
+        if ($this->session->has_userdata('logged_in')) {
+            $this->load->view('timeline', $data);
+        } else {
+            $this->load->view('errors/404');
+        }
+        $this->load->view('layouts/footer');
+    }
+
+    public function post()
+    {
+        $this->load->view('layouts/header');
+        if ($this->session->has_userdata('logged_in')) {
+            $this->load->view('post');
+        } else {
+            $this->load->view('errors/404');
+        }
+        $this->load->view('layouts/footer');
+    }
 }
