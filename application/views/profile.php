@@ -5,7 +5,7 @@
                 <div class="card-header">
                     <br><br><br>
                 </div>
-                <img class="card-img-top img-fluid rounded-circle mt-n5 ml-5 card" src="<?php echo base_url(); ?>assets/avatar/noimage.jpg" alt="" style="width: 150px; height: 150px;">
+                <img class="card-img-top img-fluid rounded-circle mt-n5 ml-5 card" src="<?php echo base_url(); ?>assets/avatar/<?php echo $u['user_avatar'] ?>" alt="" style="width: 150px; height: 150px;">
                 <div class="card-body ml-5 ">
                     <div class="mt-3">
                         <h4 class="card-title"><?php echo $u['first_name'] . ' ' . $u['last_name'] ?></h4>
@@ -59,17 +59,14 @@
                                                     <p class="card-text"><?php echo $post->post_caption ?></p>
                                                 </div>
                                             </div>
-                                            <?php if($_SESSION['uname'] == $post->post_user): ?>
-                                            <div class="float-right">
-                                                <?php echo form_open('PostController/delete/'.$post->id.'/'.$_SESSION['id'].'/'.$post->post_img) ?>
-                                                    <button type="submit" class="btn btn-danger">Delete Post</button>
-                                                </form>
-                                            </div>
+                                            <?php if ($_SESSION['uname'] == $post->post_user) : ?>
                                             <?php endif; ?>
                                         </div>
                                         <div class="modal-footer">
+                                            <?php echo form_open('PostController/delete/' . $post->id . '/' . $_SESSION['id'] . '/' . $post->post_img) ?>
+                                            <button type="submit" class="btn btn-danger">Delete Post</button>
+                                            </form>
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
                                 </div>

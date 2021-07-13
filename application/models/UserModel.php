@@ -66,7 +66,7 @@ class UserModel extends CI_Model
             'first_name' => $this->input->post('fname'),
             'last_name' => $this->input->post('lname'),
             'user_pass' => $this->input->post('newPass'),
-            'user_avatar' => $this->input->post('userfile')
+            'user_avatar' => $img
         );
         $this->db->where('id', $id);
         $this->db->update('user_accounts', $data);

@@ -135,8 +135,11 @@ class UserController extends CI_Controller
                 $errors = array('error' => $this->upload->display_errors());
                 $postImg = 'noimage.jpg';
             } else {
-                $data = array('upload_data' => $this->upload->data());
-                $postImg = $_FILES['userfile']['name'];
+                if ($_FILES['userfile']['size'] == 0) {
+                    $postImg = 'noimage.jpg';
+                } else {
+                    $postImg = $_FILES['userfile']['name'];
+                }
             }
             $this->UserModel->editUser($id, $postImg);
             $result = $this->UserModel->getUserProfile($id);
