@@ -26,8 +26,8 @@ class PostController extends CI_Controller
             } else {
                 $data = array('upload_data' => $this->upload->data());
                 $postImg = $_FILES['userfile']['name'];
-                $this->PostModel->addPost($_SESSION['uname'], $postImg);
-                echo "success";
+                $this->PostModel->addPost($_SESSION['uname'], $postImg, $_SESSION['id']);
+                redirect('timeline');
             }
         }
     }
@@ -39,5 +39,12 @@ class PostController extends CI_Controller
         $this->load->view('layouts/header');
         $this->load->view('timeline', $data);
         $this->load->view('layouts/footer');
+    }
+
+    public function delete($post_id, $user_id)
+    {
+        $this->load->model('PostModel');
+        $this->PostModel->deletePost($post_id);
+        redirect('profile/'.$user_id);
     }
 }

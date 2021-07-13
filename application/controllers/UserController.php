@@ -59,7 +59,15 @@ class UserController extends CI_Controller
             $pass = $this->input->post('pass');
             $user = $this->UserModel->getUser($uname, $pass);
             if ($user == false) {
-                echo "No user";
+                $data['error'] = '  <div class="alert position-sticky alert-danger alert-dismissible fade show" style="width:98vh;" role="alert">
+                                        <strong>User credential doesn\'t exist!</strong> Try again.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>';
+                $this->load->view('layouts/header');
+                $this->load->view('auth/login', $data);
+                $this->load->view('layouts/footer');
             } else {
                 $result = $user[0];
                 if ($result['user_status'] != '1') {
@@ -68,6 +76,7 @@ class UserController extends CI_Controller
                     $this->load->view('layouts/footer');
                 } else {
                     $userdata = array(
+                        'id' => $result['id'],
                         'fname' => $result['first_name'],
                         'lname' => $result['last_name'],
                         'email' => $result['user_email'],
@@ -77,15 +86,90 @@ class UserController extends CI_Controller
                         'logged_in' => true
                     );
                     $this->session->set_userdata($userdata);
-                    echo $_SESSION['fname'];
+                    redirect('timeline');
                 }
             }
+        }
+    }
+
+    public function edit($id)
+    {
+        $this->load->model('UserModel');
+        $this->form_validation->set_rules('fname', 'First Name', 'required');
+        $this->form_validation->set_rules('lname', 'Last Name', 'required');
+        $this->form_validation->set_rules(
+            'currPass',
+            'Current Password',
+            array(
+                'required',
+                array(
+                    'pass_mismatch',
+                    function () {
+                        if ($this->input->post('currPass') !== $_SESSION['pass']) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+                )
+            ),
+            array(
+                'pass_mistmatch' => 'Current password field is incorrect.'
+            )
+        );
+        $this->form_validation->set_rules('newPass', 'New Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('ConfPass', 'Confirm Password', 'required|matches[newPass]');
+        if ($this->form_validation->run() == false) {
+            $data['user'] = $this->UserModel->getUser($_SESSION['uname'], $_SESSION['pass']);
+            $this->load->view('layouts/header');
+            $this->load->view('edit', $data);
+            $this->load->view('layouts/footer');
+        } else {
+            $config['upload_path'] = './assets/post/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = '2048';
+            $config['max_width'] = '0';
+            $config['max_height'] = '0';
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload()) {
+                $errors = array('error' => $this->upload->display_errors());
+                $postImg = 'noimage.jpg';
+            } else {
+                $data = array('upload_data' => $this->upload->data());
+                $postImg = $_FILES['userfile']['name'];
+            }
+            $this->UserModel->editUser($id, $postImg);
+            $result = $this->UserModel->getUserProfile($id);
+            $res = $result[0];
+            unset(
+                $_SESSION['id'],
+                $_SESSION['fname'],
+                $_SESSION['lname'],
+                $_SESSION['email'],
+                $_SESSION['uname'],
+                $_SESSION['pass'],
+                $_SESSION['avatar'],
+                $_SESSION['logged_in']
+            );
+            $userdata = array(
+                'id' => $res['id'],
+                'fname' => $res['first_name'],
+                'lname' => $res['last_name'],
+                'email' => $res['user_email'],
+                'uname' => $res['user_name'],
+                'pass' => $res['user_pass'],
+                'avatar' => $res['user_avatar'],
+                'logged_in' => true
+            );
+            $this->session->set_userdata($userdata);
+            redirect('profile/'.$id);
         }
     }
 
     public function logout()
     {
         unset(
+            $_SESSION['id'],
             $_SESSION['fname'],
             $_SESSION['lname'],
             $_SESSION['email'],

@@ -7,10 +7,10 @@ class UserModel extends CI_Model
         parent::__construct();
         $this->load->database();
     }
-    
+
     public function registerUser()
     {
-        $data = array (
+        $data = array(
             'first_name' => $this->input->post('fname'),
             'last_name' => $this->input->post('lname'),
             'user_email' => $this->input->post('email'),
@@ -44,5 +44,31 @@ class UserModel extends CI_Model
         } else {
             return false;
         }
+    }
+
+    public function getUserProfile($id)
+    {
+        $this->db->select("*");
+        $this->db->where('id', $id);
+        $this->db->from('user_accounts');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $data = $query->result_array();
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function editUser($id, $img)
+    {
+        $data = array (
+            'first_name' => $this->input->post('fname'),
+            'last_name' => $this->input->post('lname'),
+            'user_pass' => $this->input->post('newPass'),
+            'user_avatar' => $this->input->post('userfile')
+        );
+        $this->db->where('id', $id);
+        $this->db->update('user_accounts', $data);
     }
 }

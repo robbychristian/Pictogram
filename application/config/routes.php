@@ -58,3 +58,5 @@ $route['login'] = "PagesController/login";
 $route['create'] = "UserController/create";
 $route['timeline'] = "PagesController/timeline";
 $route['post'] = "PagesController/post";
+$route['edit'] = "PagesController/edit";
+$route['profile/(:num)'] = "PagesController/profile/$1";
