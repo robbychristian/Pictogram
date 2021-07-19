@@ -18,7 +18,7 @@ class UserModel extends CI_Model
             'user_pass' => $this->input->post('pass'),
             'user_avatar' => 'noimage.jpg',
             'user_status' => '0',
-            'user_verification' => hash('md5', 'verification code')
+            'user_verification' => hash('md5', rand(-10000, 100000000))
         );
         $this->db->insert('user_accounts', $data);
         return ($data);

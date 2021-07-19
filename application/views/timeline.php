@@ -8,9 +8,9 @@
         </div>
     <?php else : ?>
         <?php foreach ($posts as $post) : ?>
-            <div class="container bg-white mt-5 mb-5">
+            <div class="container bg-white mt-5 mb-5 pb-5">
                 <div class="mx-auto" style="width: 55rem; height: 100%; min-width: 30rem; min-height: 30rem;">
-                    <img src="<?php echo base_url() ?>assets/post/<?php echo $post->post_img ?>" style="height: 100vh;" class="img-fluid" alt="">
+                    <img src="<?php echo base_url() ?>assets/post/<?php echo $post->post_img ?>" style="height: 100vh; object-fit: contain;" class="img-fluid" alt="">
                 </div>
                 <div class="post-caption text-dark bg-white">
                     <div class="card-body">
@@ -24,7 +24,11 @@
                                 <span class="badge badge-light ml-2"><?php echo $post->created_at; ?></span>
                             </div>
                         </div>
-                        <p class="card-text"><?php echo $post->post_caption ?></p>
+                    </div>
+                    <div class="container">
+                        <div class="card-footer ml-5 mr-5">
+                            <p class="card-text"><?php echo $post->post_caption ?></p>
+                        </div>
                     </div>
                 </div>
             </div>

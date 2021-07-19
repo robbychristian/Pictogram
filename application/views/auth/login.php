@@ -7,17 +7,17 @@
             echo $error;
         } ?>
         <div class="row">
-            <div class="col">
+            <div class="col" style="height: 20vh;">
                 <div class="display-4 font-weight-bold text-center mt-5 mb-5">Login Your Account</div>
             </div>
         </div>
-        <div class="row justify-content-center mt-5">
-            <div class="col mt-5">
+        <div class="row justify-content-center">
+            <div class="col">
                 <?php echo form_open('UserController/login') ?>
-                <div class="form-group row mt-5 ml-5 mr-5 mb-5">
-                    <label for="inputPassword" class="col-lg-3 col-form-label col-form-label-lg mt-5">Username</label>
+                <div class="form-group row ml-5 mr-5 mb-5">
+                    <label for="inputPassword" class="col-lg-3 col-form-label col-form-label-lg">Username</label>
                     <div class="col-xl-9">
-                        <input type="text" class="form-control form-control-lg mt-5" name="uname">
+                        <input type="text" class="form-control form-control-lg" name="uname">
                         <small id="helpId" class="text-danger"><?php echo form_error('uname') ?></small>
                     </div>
                 </div>

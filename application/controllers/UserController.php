@@ -114,7 +114,7 @@ class UserController extends CI_Controller
                 )
             ),
             array(
-                'pass_mistmatch' => 'Current password field is incorrect.'
+                'pass_mismatch' => 'Current password field is incorrect.'
             )
         );
         $this->form_validation->set_rules('newPass', 'New Password', 'required|min_length[6]');
@@ -125,7 +125,7 @@ class UserController extends CI_Controller
             $this->load->view('edit', $data);
             $this->load->view('layouts/footer');
         } else {
-            $config['upload_path'] = './assets/post/';
+            $config['upload_path'] = './assets/avatar/';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['max_size'] = '2048';
             $config['max_width'] = '0';
@@ -134,38 +134,91 @@ class UserController extends CI_Controller
             if (!$this->upload->do_upload()) {
                 $errors = array('error' => $this->upload->display_errors());
                 $postImg = 'noimage.jpg';
+                $this->UserModel->editUser($id, $postImg);
+                $result = $this->UserModel->getUserProfile($id);
+                $res = $result[0];
+                unset(
+                    $_SESSION['id'],
+                    $_SESSION['fname'],
+                    $_SESSION['lname'],
+                    $_SESSION['email'],
+                    $_SESSION['uname'],
+                    $_SESSION['pass'],
+                    $_SESSION['avatar'],
+                    $_SESSION['logged_in']
+                );
+                $userdata = array(
+                    'id' => $res['id'],
+                    'fname' => $res['first_name'],
+                    'lname' => $res['last_name'],
+                    'email' => $res['user_email'],
+                    'uname' => $res['user_name'],
+                    'pass' => $res['user_pass'],
+                    'avatar' => $res['user_avatar'],
+                    'logged_in' => true
+                );
+                $this->session->set_userdata($userdata);
+                $this->UserModel->editUser($id, $postImg);
+                redirect('profile/' . $id);
             } else {
                 if ($_FILES['userfile']['size'] == 0) {
                     $postImg = 'noimage.jpg';
+                    $this->UserModel->editUser($id, $postImg);
+                    $result = $this->UserModel->getUserProfile($id);
+                    $res = $result[0];
+                    unset(
+                        $_SESSION['id'],
+                        $_SESSION['fname'],
+                        $_SESSION['lname'],
+                        $_SESSION['email'],
+                        $_SESSION['uname'],
+                        $_SESSION['pass'],
+                        $_SESSION['avatar'],
+                        $_SESSION['logged_in']
+                    );
+                    $userdata = array(
+                        'id' => $res['id'],
+                        'fname' => $res['first_name'],
+                        'lname' => $res['last_name'],
+                        'email' => $res['user_email'],
+                        'uname' => $res['user_name'],
+                        'pass' => $res['user_pass'],
+                        'avatar' => $res['user_avatar'],
+                        'logged_in' => true
+                    );
+                    $this->session->set_userdata($userdata);
+                    $this->UserModel->editUser($id, $postImg);
+                    redirect('profile/' . $id);
                 } else {
                     $postImg = $_FILES['userfile']['name'];
+                    $this->UserModel->editUser($id, $postImg);
+                    $result = $this->UserModel->getUserProfile($id);
+                    $res = $result[0];
+                    unset(
+                        $_SESSION['id'],
+                        $_SESSION['fname'],
+                        $_SESSION['lname'],
+                        $_SESSION['email'],
+                        $_SESSION['uname'],
+                        $_SESSION['pass'],
+                        $_SESSION['avatar'],
+                        $_SESSION['logged_in']
+                    );
+                    $userdata = array(
+                        'id' => $res['id'],
+                        'fname' => $res['first_name'],
+                        'lname' => $res['last_name'],
+                        'email' => $res['user_email'],
+                        'uname' => $res['user_name'],
+                        'pass' => $res['user_pass'],
+                        'avatar' => $res['user_avatar'],
+                        'logged_in' => true
+                    );
+                    $this->session->set_userdata($userdata);
+                    $this->UserModel->editUser($id, $postImg);
+                    redirect('profile/' . $id);
                 }
             }
-            $this->UserModel->editUser($id, $postImg);
-            $result = $this->UserModel->getUserProfile($id);
-            $res = $result[0];
-            unset(
-                $_SESSION['id'],
-                $_SESSION['fname'],
-                $_SESSION['lname'],
-                $_SESSION['email'],
-                $_SESSION['uname'],
-                $_SESSION['pass'],
-                $_SESSION['avatar'],
-                $_SESSION['logged_in']
-            );
-            $userdata = array(
-                'id' => $res['id'],
-                'fname' => $res['first_name'],
-                'lname' => $res['last_name'],
-                'email' => $res['user_email'],
-                'uname' => $res['user_name'],
-                'pass' => $res['user_pass'],
-                'avatar' => $res['user_avatar'],
-                'logged_in' => true
-            );
-            $this->session->set_userdata($userdata);
-            redirect('profile/'.$id);
         }
     }
 
@@ -181,6 +234,6 @@ class UserController extends CI_Controller
             $_SESSION['avatar'],
             $_SESSION['logged_in']
         );
-        redirect('home');
+        redirect('login');
     }
 }

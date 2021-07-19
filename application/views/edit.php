@@ -16,31 +16,31 @@
         <div class="card p-5">
             <div class="display-4">Edit Profile</div>
             <hr>
-            <?php echo form_open('UserController/edit/'.$u['id']) ?>
+            <?php echo form_open_multipart('UserController/edit/'.$u['id']) ?>
             <div class="text-left">
                 <div class="form-group">
                     <label for="">First Name</label>
-                    <input type="text" name="fname" id="" class="form-control col-sm-6" placeholder="" aria-describedby="helpId">
+                    <input type="text" name="fname" id="" class="form-control col-sm-6" value="<?php echo $u['first_name'] ?>" aria-describedby="helpId">
                     <small class="text-danger"><?php echo form_error('fname') ?></small>
                 </div>
                 <div class="form-group">
                     <label for="">Last Name</label>
-                    <input type="text" name="lname" id="" class="form-control col-sm-6" placeholder="" aria-describedby="helpId">
+                    <input type="text" name="lname" id="" class="form-control col-sm-6" value="<?php echo $u['last_name'] ?>" aria-describedby="helpId">
                     <small class="text-danger"><?php echo form_error('lname') ?></small>
                 </div>
                 <div class="form-group">
                     <label for="">Current Password</label>
-                    <input type="password" name="currPass" id="" class="form-control col-sm-6" placeholder="" aria-describedby="helpId">
+                    <input type="password" name="currPass" id="" class="form-control col-sm-6" aria-describedby="helpId">
                     <small class="text-danger"><?php echo form_error('currPass') ?></small>
                 </div>
                 <div class="form-group">
                     <label for="">New Password</label>
-                    <input type="password" name="newPass" id="" class="form-control col-sm-6" placeholder="" aria-describedby="helpId">
+                    <input type="password" name="newPass" id="" class="form-control col-sm-6" aria-describedby="helpId">
                     <small class="text-danger"><?php echo form_error('newPass') ?></small>
                 </div>
                 <div class="form-group">
                     <label for="">Confirm Password</label>
-                    <input type="password" name="ConfPass" id="" class="form-control col-sm-6" placeholder="" aria-describedby="helpId">
+                    <input type="password" name="ConfPass" id="" class="form-control col-sm-6" aria-describedby="helpId">
                     <small class="text-danger"><?php echo form_error('ConfPass') ?></small>
                 </div>
                 <hr>

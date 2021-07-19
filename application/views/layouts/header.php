@@ -24,19 +24,21 @@
 
 <body>
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
-        <a class="navbar-brand ml-5" href="<?php base_url(); ?>home">
-            <img src="<?php echo base_url(); ?>assets/img/Logo.png" alt="" style="width: 9rem; height: 3rem">
-        </a>
+        <?php if (!$this->session->has_userdata('logged_in')) : ?>
+            <a class="navbar-brand ml-5" href="<?php base_url(); ?>login">
+                <img src="<?php echo base_url(); ?>assets/img/Logo.png" alt="" style="width: 9rem; height: 3rem">
+            </a>
+        <?php elseif ($this->session->has_userdata('logged_in')) : ?>
+            <a class="navbar-brand ml-5" href="http://localhost/pictogram/index.php/timeline">
+                <img src="<?php echo base_url(); ?>assets/img/Logo.png" alt="" style="width: 9rem; height: 3rem">
+            </a>
+        <?php endif; ?>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <?php if (!$this->session->has_userdata('logged_in')) : ?>
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0" style="width: 28rem">
-
-                    <li class="nav-item active">
-                        <a class="nav-link navbtn" href="http://localhost/pictogram/index.php/home">Home</a>
-                    </li>
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0" style="width: 15rem">
                     <li class="nav-item active">
                         <a class="nav-link navbtn" href="http://localhost/pictogram/index.php/register">Register</a>
                     </li>
@@ -55,7 +57,7 @@
                             Profile
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="http://localhost/pictogram/index.php/profile/<?php echo $_SESSION['id'] ?>"><?php echo $_SESSION['fname'].' '.$_SESSION['lname'] ?></a>
+                            <a class="dropdown-item" href="http://localhost/pictogram/index.php/profile/<?php echo $_SESSION['id'] ?>"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['lname'] ?></a>
                             <a class="dropdown-item" href="http://localhost/pictogram/index.php/edit/">Edit Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/UserController/logout">Logout</a>

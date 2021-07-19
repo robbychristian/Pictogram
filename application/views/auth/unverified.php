@@ -5,7 +5,7 @@
             <h4 class="card-title text-center">One more step...</h4>
             <p class="card-text text-center">To fully access the feature of our website, an email verification is sent to your email account.</p>
             <div class="mx-auto" style="width: 11.5rem;">
-                <a href="http://localhost/pictogram/index.php/home"><button type="button" class="verify-button">Proceed</button></a>
+                <a href="http://localhost/pictogram/index.php/login"><button type="button" class="verify-button">Proceed</button></a>
             </div>
         </div>
     </div>
