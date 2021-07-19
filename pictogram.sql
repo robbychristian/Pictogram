@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2021 at 05:46 PM
+-- Generation Time: Jul 19, 2021 at 05:24 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -44,8 +44,8 @@ CREATE TABLE `user_accounts` (
 --
 
 INSERT INTO `user_accounts` (`id`, `first_name`, `last_name`, `user_email`, `user_name`, `user_pass`, `user_avatar`, `user_status`, `user_verification`) VALUES
-(51, 'Rendon', 'Labador', 'robbychristiandeleon@gmail.com', 'Pokus', '123456', 'noimage.jpg', 1, '3d6049a3b598510088cc75d1a0653f32'),
-(52, 'Theo', 'Labador', 'user@email.com', 'robbychristian', '567890', 'noimage.jpg', 1, '');
+(53, 'Theo', 'Mendoza', 'robbychristiandeleon@gmail.com', 'Iho-', '123456', 'Logo.png', 1, '2e38874b70d9295f048ec80740f06578'),
+(54, 'Legit', 'Account', 'accounydummy001@gmail.com', 'antiDDS', '123456', 'noimage.jpg', 1, 'fd2b076ae7e5d1c9aaad0a6c8f239289');
 
 -- --------------------------------------------------------
 
@@ -67,8 +67,10 @@ CREATE TABLE `user_posts` (
 --
 
 INSERT INTO `user_posts` (`id`, `user_id`, `post_user`, `post_caption`, `post_img`, `created_at`) VALUES
-(5, 51, 'Pokus', 'asdasd', 'rendon.jpg', '2021-07-13 14:02:46'),
-(18, 52, 'robbychristian', '', 'del.png', '2021-07-13 17:42:33');
+(20, 53, 'Iho-', 'colorsz', 'colorscheme.png', '2021-07-19 16:53:11'),
+(21, 53, 'Iho-', 'logo', 'Logo.png', '2021-07-19 16:56:50'),
+(22, 53, 'Iho-', 'goal', 'rendon.jpg', '2021-07-19 16:57:19'),
+(23, 53, 'Iho-', 'dsfdsf', 'del.png', '2021-07-19 17:04:32');
 
 --
 -- Indexes for dumped tables
@@ -97,13 +99,13 @@ ALTER TABLE `user_posts`
 -- AUTO_INCREMENT for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `user_posts`
 --
 ALTER TABLE `user_posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
